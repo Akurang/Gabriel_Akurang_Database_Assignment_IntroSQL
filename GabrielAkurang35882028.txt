@@ -378,3 +378,54 @@ MariaDB [EliteVideo]> select Movie_Num,Movie_Title, Movie_Cost
 
 
 #Question 13
+
+MariaDB [EliteVideo]> select Movie_Num,Movie_Title, Movie_Cost,Movie_Genre from movie where (Movie_Genre='ACTION' or Movie_Genre='COMEDY') and Movie_Cost < 50;
++-----------+---------------+------------+-------------+
+| Movie_Num | Movie_Title   | Movie_Cost | Movie_Genre |
++-----------+---------------+------------+-------------+
+|      1237 | Beatnik Fever |      29.95 | COMEDY      |
+|      1245 | Time to Burn  |      45.49 | ACTION      |
++-----------+---------------+------------+-------------+
+2 rows in set (0.002 sec)
+
+
+#Question 14
+
+MariaDB [EliteVideo]> select Mem_Num, Mem_Fname, Mem_Lname, Mem_Street, Mem_State, Mem_Balance
+    -> from Membership
+    -> where Mem_State = 'TN'
+    -> and Mem_Balance < 5
+    -> and Mem_Street like '%avenue';
++---------+-----------+-----------+-----------------------+-----------+-------------+
+| Mem_Num | Mem_Fname | Mem_Lname | Mem_Street            | Mem_State | Mem_Balance |
++---------+-----------+-----------+-----------------------+-----------+-------------+
+|     104 | Jamal     | Melendez  | 788 East 145th Avenue | TN        |           0 |
+|     112 | Luis      | Trujillo  | 7267 Melvin Avenue    | TN        |           3 |
++---------+-----------+-----------+-----------------------+-----------+-------------+
+2 rows in set (0.001 sec)
+
+
+#Question 15
+
+MariaDB [EliteVideo]> select Movie_Genre, count(Movie_Genre) AS 'Number of Movies' from movie group by Movie_Genre;
++-------------+------------------+
+| Movie_Genre | Number of Movies |
++-------------+------------------+
+| ACTION      |                2 |
+| COMEDY      |                2 |
+| DRAMA       |                3 |
+| FAMILY      |                1 |
++-------------+------------------+
+4 rows in set (0.002 sec)
+
+#Question 16
+
+MariaDB [EliteVideo]> select avg(Movie_Cost) as 'Average Movie Cost'
+    -> from movie;
++--------------------+
+| Average Movie Cost |
++--------------------+
+|          51.127500 |
++--------------------+
+1 row in set (0.002 sec)
+
