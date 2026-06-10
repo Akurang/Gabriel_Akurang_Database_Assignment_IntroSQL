@@ -429,3 +429,72 @@ MariaDB [EliteVideo]> select avg(Movie_Cost) as 'Average Movie Cost'
 +--------------------+
 1 row in set (0.002 sec)
 
+
+#Question 17
+
+MariaDB [EliteVideo]> select Movie_Genre, avg(Movie_Cost) as 'Average Cost'
+    -> from movie
+    -> group by Movie_Genre;
++-------------+--------------+
+| Movie_Genre | Average Cost |
++-------------+--------------+
+| ACTION      |    52.720000 |
+| COMEDY      |    44.120000 |
+| DRAMA       |    58.463333 |
+| FAMILY      |    39.950000 |
++-------------+--------------+
+4 rows in set (0.002 sec)
+
+
+#Question 18
+
+MariaDB [EliteVideo]> select Movie.Movie_Title, Movie.Movie_Genre, Price.Price_Description, Price.Price_Rentfee
+    -> from movie inner join price on
+    -> Movie.Price_Code = Price.Price_Code;
++----------------------------+-------------+-------------------+---------------+
+| Movie_Title                | Movie_Genre | Price_Description | Price_Rentfee |
++----------------------------+-------------+-------------------+---------------+
+| The Cesar Family Christmas | FAMILY      | New Release       |           4.0 |
+| Smokey Mountain Wildlife   | ACTION      | Discount          |           2.0 |
+| Richard Goodhope           | DRAMA       | New Release       |           4.0 |
+| Beatnik Fever              | COMEDY      | New Release       |           4.0 |
+| Where Hope Dies            | DRAMA       | Discount          |           2.0 |
+| Time to Burn               | ACTION      | Discount          |           2.0 |
+| What He Doesnt Know        | COMEDY      | Standard          |           2.5 |
++----------------------------+-------------+-------------------+---------------+
+7 rows in set (0.007 sec)
+
+
+#Question 19
+
+MariaDB [EliteVideo]> select Movie.Movie_Genre, avg(Price.Price_Rentfee) as 'Average Rental Fee' from movie inner join price on Movie.Price_Code = Price.Price_Code group by Movie.Movie_Genre;
++-------------+--------------------+
+| Movie_Genre | Average Rental Fee |
++-------------+--------------------+
+| ACTION      |            2.00000 |
+| COMEDY      |            3.25000 |
+| DRAMA       |            3.00000 |
+| FAMILY      |            4.00000 |
++-------------+--------------------+
+4 rows in set (0.001 sec)
+
+
+#Question 20
+
+MariaDB [EliteVideo]> select Movie.Movie_Title, Movie.Movie_Cost/Price.Price_Rentfee as 'Breakeven Renntals' from movie inner join price on Movie.Price_Code = Price.Price_Code;
++----------------------------+--------------------+
+| Movie_Title                | Breakeven Renntals |
++----------------------------+--------------------+
+| The Cesar Family Christmas |           9.987500 |
+| Smokey Mountain Wildlife   |          29.975000 |
+| Richard Goodhope           |          14.987500 |
+| Beatnik Fever              |           7.487500 |
+| Where Hope Dies            |          12.745000 |
+| Time to Burn               |          22.745000 |
+| What He Doesnt Know        |          23.316000 |
++----------------------------+--------------------+
+7 rows in set (0.000 sec)
+
+
+##Question 21
+
