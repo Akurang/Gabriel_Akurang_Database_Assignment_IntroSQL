@@ -619,5 +619,22 @@ MariaDB [EliteVideo]> select DETAILRENTAL.Rent_Num, RENTAL.Rent_Date, Movie.Movi
 
 
 #Question 28
+MariaDB [EliteVideo]> SELECT Movie_Num, Movie_Genre, AVG(Movie_Cost)
+    -> OVER (PARTITION BY Movie_Genre) AS 'Average_Cost',Movie_Cost,
+    -> ((Movie_Cost - AVG(Movie_Cost) OVER (PARTITION BY Movie_Genre)) / AVG(Movie_Cost) OVER (PARTITION BY Movie_Genre) * 100) AS 'Percent_Difference'
+    -> FROM MOVIE;                                                                                                                                                                                                                            +-----------+-------------+--------------+------------+--------------------+
+| Movie_Num | Movie_Genre | Average_Cost | Movie_Cost | Percent_Difference |
++-----------+-------------+--------------+------------+--------------------+
+|      1245 | ACTION      |    52.720000 |      45.49 |     -13.7139605463 |
+|      1235 | ACTION      |    52.720000 |      59.95 |      13.7139605463 |
+|      1246 | COMEDY      |    44.120000 |      58.29 |      32.1169537625 |
+|      1237 | COMEDY      |    44.120000 |      29.95 |     -32.1169537625 |
+|      1239 | DRAMA       |    58.463333 |      25.49 |     -56.4000228061 |
+|      1236 | DRAMA       |    58.463333 |      59.95 |       2.5429043851 |
+|      1238 | DRAMA       |    58.463333 |      89.95 |      53.8571184227 |
+|      1234 | FAMILY      |    39.950000 |      39.95 |       0.0000000000 |
++-----------+-------------+--------------+------------+--------------------+
+8 rows in set (0.001 sec)
+
 
 
