@@ -498,3 +498,70 @@ MariaDB [EliteVideo]> select Movie.Movie_Title, Movie.Movie_Cost/Price.Price_Ren
 
 ##Question 21
 
+MariaDB [EliteVideo]> select Movie.Movie_Title, Movie.Movie_Year
+    -> from movie inner join price on
+    ->  Movie.Price_Code = Price.Price_Code;
++----------------------------+------------+
+| Movie_Title                | Movie_Year |
++----------------------------+------------+
+| The Cesar Family Christmas |       2014 |
+| Smokey Mountain Wildlife   |       2011 |
+| Richard Goodhope           |       2015 |
+| Beatnik Fever              |       2014 |
+| Where Hope Dies            |       2005 |
+| Time to Burn               |       2010 |
+| What He Doesnt Know        |       2013 |
++----------------------------+------------+
+7 rows in set (0.000 sec)
+
+
+##Question 22
+
+MariaDB [EliteVideo]> select Movie_Title, Movie_Genre, Movie_Cost
+    -> from movie
+    -> where Movie_Cost > 44.99 and Movie_Cost < 49.99;
++--------------+-------------+------------+
+| Movie_Title  | Movie_Genre | Movie_Cost |
++--------------+-------------+------------+
+| Time to Burn | ACTION      |      45.49 |
++--------------+-------------+------------+
+1 row in set (0.000 sec)
+
+
+#Question 23
+
+MariaDB [EliteVideo]> select Movie.Movie_Title, Price.Price_Description, Price.Price_Rentfee,  Movie.Movie_Genre
+    -> from movie inner join price on
+    -> Movie.Price_Code = Price.Price_Code
+    -> where Movie.Movie_Genre = 'FAMILY' or Movie.Movie_Genre = 'DRAMA' or Movie.Movie_Genre = 'COMEDY';
++----------------------------+-------------------+---------------+-------------+
+| Movie_Title                | Price_Description | Price_Rentfee | Movie_Genre |
++----------------------------+-------------------+---------------+-------------+
+| The Cesar Family Christmas | New Release       |           4.0 | FAMILY      |
+| Richard Goodhope           | New Release       |           4.0 | DRAMA       |
+| Beatnik Fever              | New Release       |           4.0 | COMEDY      |
+| Where Hope Dies            | Discount          |           2.0 | DRAMA       |
+| What He Doesnt Know        | Standard          |           2.5 | COMEDY      |
++----------------------------+-------------------+---------------+-------------+
+5 rows in set (0.002 sec)
+
+
+#Question 24
+
+MariaDB [EliteVideo]> select distinct Membership.Mem_Num, Membership.Mem_Fname, Membership.Mem_Lname, Membership.Mem_Balance from membership inner join rental on Membership.Mem_Num = Rental.Mem_Num;
++---------+-----------+-----------+-------------+
+| Mem_Num | Mem_Fname | Mem_Lname | Mem_Balance |
++---------+-----------+-----------+-------------+
+|     102 | Tami      | Dawson    |          11 |
+|     103 | Curt      | Knight    |           6 |
+|     104 | Jamal     | Melendez  |           0 |
+|     105 | Iva       | Mcclain   |          15 |
+|     107 | Rosario   | Elliott   |           5 |
+|     110 | Lewis     | Rosales   |           0 |
+|     111 | Stacy     | Mann      |           8 |
++---------+-----------+-----------+-------------+
+7 rows in set (0.000 sec)
+
+
+
+
