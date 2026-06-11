@@ -563,5 +563,61 @@ MariaDB [EliteVideo]> select distinct Membership.Mem_Num, Membership.Mem_Fname, 
 7 rows in set (0.000 sec)
 
 
+#Question 25
+
+MariaDB [EliteVideo]> select min( Membership.Mem_Balance) as 'Minimum Balance', max( Membership.Mem_Balance) as 'Maximum Balance', avg(Membership.Mem_Balance) as 'Average Balance' from membership where mem_num in (select distinct mem_num from rental);
++-----------------+-----------------+-----------------+
+| Minimum Balance | Maximum Balance | Average Balance |
++-----------------+-----------------+-----------------+
+|               0 |              15 |          6.4286 |
++-----------------+-----------------+-----------------+
+1 row in set (0.002 sec)
+
+
+#Question 26
+
+MariaDB [EliteVideo]> select DETAILRENTAL.Rent_Num, RENTAL.Rent_Date, DETAILRENTAL.Vid_Num, Movie.Movie_Title, DETAILRENTAL.Detail_DueDate, DETAILRENTAL.Detail_ReturnDate from DETAILRENTAL inner join video on DETAILRENTAL.Vid_Num = VIDEO.Vid_Num INNER JOIN MOVIE ON VIDEO.MOVIE_NUM = MOVIE.MOVIE_NUM INNER JOIN RENTAL ON DETAILRENTAL.Rent_Num = RENTAL.Rent_Num
+    -> where DETAILRENTAL.Detail_ReturnDate > DETAILRENTAL.Detail_DueDate
+    -> order by DETAILRENTAL.Rent_Num,
+    -> Movie.Movie_Title;
++----------+------------+---------+----------------------------+----------------+-------------------+
+| Rent_Num | Rent_Date  | Vid_Num | Movie_Title                | Detail_DueDate | Detail_ReturnDate |
++----------+------------+---------+----------------------------+----------------+-------------------+
+|     1003 | 2016-03-02 |   54325 | The Cesar Family Christmas | 2016-03-04     | 2016-03-09        |
+|     1003 | 2016-03-02 |   61369 | What He Doesnt Know        | 2016-03-06     | 2016-03-09        |
+|     1003 | 2016-03-02 |   61388 | Where Hope Dies            | 2016-03-06     | 2016-03-09        |
+|     1004 | 2016-03-02 |   44392 | Beatnik Fever              | 2016-03-05     | 2016-03-07        |
+|     1004 | 2016-03-02 |   34367 | Richard Goodhope           | 2016-03-05     | 2016-03-07        |
++----------+------------+---------+----------------------------+----------------+-------------------+
+5 rows in set (0.002 sec)
+
+
+#Question 27
+
+MariaDB [EliteVideo]> select DETAILRENTAL.Rent_Num, RENTAL.Rent_Date, Movie.Movie_Title, DETAILRENTAL.DETAIL_FEE
+    -> from DETAILRENTAL
+    -> INNER JOIN RENTAL ON DETAILRENTAL.Rent_Num = RENTAL.Rent_Num
+    -> inner join video on DETAILRENTAL.Vid_Num = VIDEO.Vid_Num
+    -> INNER JOIN MOVIE ON VIDEO.MOVIE_NUM = MOVIE.MOVIE_NUM
+    -> where DETAILRENTAL.Detail_ReturnDate <= DETAILRENTAL.Detail_DueDate;
++----------+------------+--------------------------+------------+
+| Rent_Num | Rent_Date  | Movie_Title              | DETAIL_FEE |
++----------+------------+--------------------------+------------+
+|     1001 | 2016-03-01 | Smokey Mountain Wildlife |        2.0 |
+|     1001 | 2016-03-01 | Richard Goodhope         |        3.5 |
+|     1001 | 2016-03-01 | Time to Burn             |        2.0 |
+|     1002 | 2016-03-01 | Beatnik Fever            |        3.5 |
+|     1004 | 2016-03-02 | Smokey Mountain Wildlife |        2.0 |
+|     1005 | 2016-03-02 | Smokey Mountain Wildlife |        2.0 |
+|     1005 | 2016-03-02 | Beatnik Fever            |        3.5 |
+|     1006 | 2016-03-02 | Richard Goodhope         |        3.5 |
+|     1008 | 2016-03-03 | Richard Goodhope         |        3.5 |
++----------+------------+--------------------------+------------+
+9 rows in set (0.001 sec)
+
+
+
+
+#Question 28
 
 
